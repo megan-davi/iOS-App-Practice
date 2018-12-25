@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Dicee
 //
-//  Created by Marshall Davi on 12/25/18.
+//  Created by Megan Davi on 12/25/18.
 //  Copyright © 2018 megan-davi. All rights reserved.
 //
 
