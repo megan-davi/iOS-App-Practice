@@ -1,5 +1,6 @@
 # iOS-App-Practice
 iOS apps created in conjunction with The App Brewery's [Udemy iOS 12 Course](https://www.udemy.com/ios-12-app-development-bootcamp/learn/v4/content)
+
 See folders for screenshots of applications.
 
 ### 01 :: I Am Rich
