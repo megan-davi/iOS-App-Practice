@@ -12,3 +12,6 @@ This app allows the user to roll two dice when a button is pressed. The dice wil
 ### 02.5 :: Swift Practice file
 Contains three functions for some practice in Swift before creating more apps. The first function calculates a BMI using an if-else statement, the second writes a song using a loop, and the third loops through the fibonacci sequence recursively. 
 
+### 03 :: Xylophone
+When a xylophone button is pressed, one of seven different notes is played. This was used as an introduction to searching for a built-in method that Swift provides, which was AVAudioPlayer in this case. This is my first app to use a do-catch block as well as troubleshoot error messages with [osstatus](https://osstatus.com), a third-party tool. 
+
