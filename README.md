@@ -9,3 +9,6 @@ This is a simple app which displays an image and a label. Based off of the thous
 ### 02 :: Dicee
 This app allows the user to roll two dice when a button is pressed. The dice will also roll when a user shakes their phone. Created as an introduction to Swift code as well as to understand how code interfaces with the app views. This also utiilizes a method to run the same set of code in multiple places throughout the document.
 
+### 02.5 :: Swift Practice file
+Contains three functions for some practice in Swift before creating more apps. The first function calculates a BMI using an if-else statement, the second writes a song using a loop, and the third loops through the fibonacci sequence recursively. 
+
