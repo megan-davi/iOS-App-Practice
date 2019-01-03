@@ -15,3 +15,5 @@ Contains three functions for some practice in Swift before creating more apps. T
 ### 03 :: Xylophone
 When a xylophone button is pressed, one of seven different notes is played. This was used as an introduction to searching for a built-in method that Swift provides, which was AVAudioPlayer in this case. This is my first app to use a do-catch block as well as troubleshoot error messages with [osstatus](https://osstatus.com), a third-party tool. 
 
+### 04 :: Quizzler
+This app allows a user to click through a quiz app answering true or false questions. The most important take-away from building this app is understanding how the model-view-controller design can be implemented in iOS apps. Learning points in this app include UI alerts (pop-up messages), accessing arrays and troubleshooting related bugs, and plenty of dot notation.
