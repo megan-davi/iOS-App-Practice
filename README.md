@@ -17,3 +17,6 @@ When a xylophone button is pressed, one of seven different notes is played. This
 
 ### 04 :: Quizzler
 This app allows a user to click through a quiz app answering true or false questions. The most important take-away from building this app is understanding how the model-view-controller design can be implemented in iOS apps. Learning points in this app include UI alerts (pop-up messages), accessing arrays and troubleshooting related bugs, and accessing a [third-party library](https://github.com/relatedcode/ProgressHUD) to show a head-up display for the user.
+
+### 05 :: Destini
+A "Choose Your Own Adventure Game" which allows a user to click through different scenarios of a story. This was mostly created to solidify knowledge gained thus far. Newest code feature is hiding buttons at the end of each story line. 
