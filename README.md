@@ -20,3 +20,6 @@ This app allows a user to click through a quiz app answering true or false quest
 
 ### 05 :: Destini
 A "Choose Your Own Adventure Game" which allows a user to click through different scenarios of a story. This was mostly created to solidify knowledge gained thus far. Newest code feature is hiding buttons at the end of each story line. 
+
+### 06 :: Calculator
+This app is not functional; it served as an introduction to setting constraints via alignment and pinning so that all future apps can look great on any screen size or alignment. This calculator mimics the look of the default Mac calculator. 
