@@ -23,3 +23,6 @@ A "Choose Your Own Adventure Game" which allows a user to click through differen
 
 ### 06 :: Calculator
 This app is not functional; it served as an introduction to setting constraints via alignment and pinning so that all future apps can look great on any screen size or alignment. This calculator mimics the look of the default Mac calculator. 
+
+### 07 :: Clima
+Work in progress! Check back soon.
