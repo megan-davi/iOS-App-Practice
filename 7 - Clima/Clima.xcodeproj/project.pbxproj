@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		33528DA6E780B5F501BBCAC7 /* Pods_Clima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4AF0FB40DA43752C143383 /* Pods_Clima.framework */; };
+		442DCF7421FAD10C009CF875 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 442DCF7321FAD10C009CF875 /* Main.storyboard */; };
 		63E28AD11B99C32400FBF6E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E28AD01B99C32400FBF6E0 /* AppDelegate.swift */; };
 		63E28AF11B99C35700FBF6E0 /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E28AF01B99C35700FBF6E0 /* WeatherDataModel.swift */; };
 		63E28AF61B99C36100FBF6E0 /* ChangeCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E28AF21B99C36100FBF6E0 /* ChangeCityViewController.swift */; };
 		63E28AF71B99C36100FBF6E0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E28AF31B99C36100FBF6E0 /* Images.xcassets */; };
-		63E28AF81B99C36100FBF6E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E28AF41B99C36100FBF6E0 /* Main.storyboard */; };
 		63E28AF91B99C36100FBF6E0 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E28AF51B99C36100FBF6E0 /* WeatherViewController.swift */; };
 		63E28AFF1B99C3B300FBF6E0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63E28AFE1B99C3B300FBF6E0 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
@@ -20,13 +20,13 @@
 /* Begin PBXFileReference section */
 		1A4AF0FB40DA43752C143383 /* Pods_Clima.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clima.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39D6A1DC17B53779F6073F64 /* Pods-Clima.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clima.release.xcconfig"; path = "Pods/Target Support Files/Pods-Clima/Pods-Clima.release.xcconfig"; sourceTree = "<group>"; };
+		442DCF7321FAD10C009CF875 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		63E28ACB1B99C32400FBF6E0 /* Clima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E28ACF1B99C32400FBF6E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63E28AD01B99C32400FBF6E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63E28AF01B99C35700FBF6E0 /* WeatherDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
 		63E28AF21B99C36100FBF6E0 /* ChangeCityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeCityViewController.swift; sourceTree = "<group>"; };
 		63E28AF31B99C36100FBF6E0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		63E28AF41B99C36100FBF6E0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		63E28AF51B99C36100FBF6E0 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		63E28AFE1B99C3B300FBF6E0 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		FFCC7951F4134F1D9CF5DB09 /* Pods-Clima.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clima.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Clima/Pods-Clima.debug.xcconfig"; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		63E28AFD1B99C38100FBF6E0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				63E28AF41B99C36100FBF6E0 /* Main.storyboard */,
+				442DCF7321FAD10C009CF875 /* Main.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -189,7 +189,7 @@
 			files = (
 				63E28AF71B99C36100FBF6E0 /* Images.xcassets in Resources */,
 				63E28AFF1B99C3B300FBF6E0 /* LaunchScreen.xib in Resources */,
-				63E28AF81B99C36100FBF6E0 /* Main.storyboard in Resources */,
+				442DCF7421FAD10C009CF875 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
