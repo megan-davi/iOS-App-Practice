@@ -25,4 +25,4 @@ A "Choose Your Own Adventure Game" which allows a user to click through differen
 This app is not functional; it served as an introduction to setting constraints via alignment and pinning so that all future apps can look great on any screen size or alignment. This calculator mimics the look of the default Mac calculator. 
 
 ### 07 :: Clima
-Work in progress! Check back soon.
+This app will first ask a user for permission to locate them for a weather forecast. The weather will display as a temperature in celsius or fahrenheit based on a toggle and display an icon depicting the current conditions. On a linked view controller, the user can select a new city to view its weather, and see it on the first view. Building this app taught me many things: how to install and use Cocoapods (Alamofire http templating and SwiftyJSON json parsing), how protocols and delegates allow for view controllers to send data to one another, how to use Swift's powerful locationManager class and the CoreLocation Weather API, as well as how to better organize code using pragma marks. It also served as a great introduction for creating segues. 
