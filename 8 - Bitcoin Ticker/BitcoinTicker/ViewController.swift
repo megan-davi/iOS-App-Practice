@@ -1,0 +1,88 @@
+//
+//  ViewController.swift
+//  BitcoinTicker
+//
+//  Created by Angela Yu on 23/01/2016.
+//  Copyright © 2016 London App Brewery. All rights reserved.
+//
+
+import UIKit
+import Alamofire
+import SwiftyJSON
+
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    // constants
+    let baseURL = "https://apiv2.bitcoinaverage.com/indices/global/ticker/BTC"
+    let currencyArray = ["AUD", "BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
+    let symbolArray = ["$", "R$", "$", "¥", "€", "£", "$", "Rp", "₪", "₹", "¥", "$", "kr", "$", "zł", "lei", "₽", "kr", "$", "$", "R"]
+    
+    // variables
+    var finalURL = ""
+    var currencySelected = ""
+
+    // IBOutlets
+    @IBOutlet weak var bitcoinPriceLabel: UILabel!
+    @IBOutlet weak var currencyPicker: UIPickerView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        currencyPicker.delegate = self
+        currencyPicker.dataSource = self
+    }
+
+    // UIPickerView delegate methods
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // fill in the picker view with the entire array
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return currencyArray.count
+    }
+    
+    // fill in the picker view with the array's data (strings)
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return currencyArray[row]
+    }
+    
+    // when a user changes the picker view, get new bitcoin data
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        finalURL = baseURL + currencyArray[row]
+        getBitcoinData(url: finalURL)
+        currencySelected = symbolArray[row]
+    }
+
+    
+    //MARK: - Networking
+    /***************************************************************/
+ 
+    // get bitcoin data using alamofire
+    func getBitcoinData(url: String) {
+        Alamofire.request(url, method: .get).responseJSON {
+            response in
+            if response.result.isSuccess {
+                print("Success! Got the bitcoin data")
+                let bitcoinJSON: JSON = JSON(response.result.value!)
+                self.updateBitcoinData(json: bitcoinJSON)
+            } else {
+                print("Error: \(String(describing: response.result.error))")
+                self.bitcoinPriceLabel.text = "Connection Issues"
+            }
+        }
+    }
+
+    //MARK: - JSON Parsing
+    /***************************************************************/
+  
+    // if data exists for a region, update price label (if/else with optional binding)
+    func updateBitcoinData(json: JSON) {
+        if let bitcoinResult = json["averages"]["day"].double {
+            bitcoinPriceLabel.text = "\(currencySelected) \(bitcoinResult)"
+        } else {
+            bitcoinPriceLabel.text = "Data unavailable."
+        }
+    }
+}
+
