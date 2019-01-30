@@ -18,19 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // the first method that will always be run
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // initialise and Configure your Firebase here:
+        // initialise and configure the Firebase
         FirebaseApp.configure()
-        
-        let myDatabase = Database.database().reference()
-        myDatabase.setValue("We've got data!")
-        
-        
         return true
     }
 
-    
-    
-    
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -8,10 +8,10 @@
 
 import UIKit
 import Firebase
+import ChameleonFramework
 
-class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    // Declare instance variables here
-
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    var messageArray: [Message] = [Message]()
     
     // IBOutlets
     @IBOutlet var heightConstraint: NSLayoutConstraint!
@@ -19,98 +19,128 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var messageTextfield: UITextField!
     @IBOutlet var messageTableView: UITableView!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //TODO: Set yourself as the delegate and datasource
+        // Set self as the delegate and datasource
         messageTableView.delegate = self
         messageTableView.dataSource = self
+        messageTextfield.delegate = self
         
+        // if a user taps the table view, run the tableViewTapped method
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
+        messageTableView.addGestureRecognizer(tapGesture)
         
-        //TODO: Set yourself as the delegate of the text field here:
-        
-        
-        
-        //TODO: Set the tapGesture here:
-        
-        
-
         // register the MessageCell.xib file
-        messageTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "CustomMessageCell")
+        messageTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "customMessageCell")
         configureTableView()
+        retrieveMessages()
         
+        // style table view
+        messageTableView.separatorStyle = .none
     }
 
     ///////////////////////////////////////////
     
     //MARK: - TableView DataSource Methods
 
-    
-    // for each row, display the custom cell
+    // for each row, display the custom cell, message and sender data, and stylized images and backgrounds
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customMessageCell", for: indexPath) as! CustomMessageCell
-        let messageArray = ["First message", "Second message", "Third message"]
-        cell.messageBody.text = messageArray[indexPath.row]
+        
+        cell.messageBody.text = messageArray[indexPath.row].messageBody
+        cell.senderUsername.text = messageArray[indexPath.row].sender
+        
+        cell.avatarImageView.image = UIImage(named: "egg")
+        if cell.senderUsername.text == Auth.auth().currentUser?.email as String! {
+            cell.avatarImageView.backgroundColor = UIColor.flatMint()
+            cell.messageBackground.backgroundColor = UIColor.flatSkyBlue()
+        } else {
+            cell.avatarImageView.backgroundColor = UIColor.flatWatermelon()
+            cell.messageBackground.backgroundColor = UIColor.flatGray()
+        }
+        
         return cell
     }
     
-    //TODO: Declare numberOfRowsInSection here:
+    // number of rows is equal to the number of messages
     func tableView(_ tableView: UITableView, numberOfRowsInSection secontion: Int) -> Int {
-        return 3
+        return messageArray.count
     }
     
+    // when the table view is tapped, run the textFieldDidEndEditing method
+    @objc func tableViewTapped() {
+        messageTextfield.endEditing(true)
+    }
     
-    //TODO: Declare tableViewTapped here:
-    
-    
-    
-    //TODO: Declare configureTableView here:
+    // increase table view row height to accomodate custom message cells
     func configureTableView() {
         messageTableView.rowHeight = UITableView.automaticDimension
         messageTableView.estimatedRowHeight = 120.0
     }
     
-    
     ///////////////////////////////////////////
     
     //MARK:- TextField Delegate Methods
     
+    // when the message box is tapped, move up to accomodate keyboard
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.5) {
+            self.heightConstraint.constant = 308
+            self.view.layoutIfNeeded()
+        }
+    }
     
+    // when the message box is done being used, move back down
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.5) {
+            self.heightConstraint.constant = 50
+            self.view.layoutIfNeeded()
+        }
+    }
 
-    
-    //TODO: Declare textFieldDidBeginEditing here:
-    
-    
-    
-    
-    //TODO: Declare textFieldDidEndEditing here:
-    
-
-    
     ///////////////////////////////////////////
-    
     
     //MARK: - Send & Recieve from Firebase
     
-    
-    
-    
-    
+    // when user presses send, send data to Firebase and setup UI for a new message
     @IBAction func sendPressed(_ sender: AnyObject) {
+        messageTextfield.endEditing(true)
+        messageTextfield.isEnabled = false
+        sendButton.isEnabled = false
         
-        
-        //TODO: Send the message to Firebase and save it in our database
-        
-        
+        let messagesDB = Database.database().reference().child("Messages")
+        let messageDictionary = ["Sender": Auth.auth().currentUser?.email, "MessageBody": messageTextfield.text!]
+        messagesDB.childByAutoId().setValue(messageDictionary) {
+            (error, reference) in
+            if error != nil {
+                print (error)
+            } else {
+                print("Message saved successfully!")
+            }
+            self.messageTextfield.isEnabled = true
+            self.sendButton.isEnabled = true
+            self.messageTextfield.text = ""
+        }
     }
     
-    //TODO: Create the retrieveMessages method here:
-    
-    
-
-    
+    // retrieve messages, append to messages array, and refresh table view with new messages
+    func retrieveMessages() {
+        let messageDB = Database.database().reference().child("Messages")
+        messageDB.observe(.childAdded) { (snapshot) in
+            let snapshotValue = snapshot.value as! Dictionary<String, String>
+            let text = snapshotValue["MessageBody"]!
+            let sender = snapshotValue["Sender"]!
+            
+            let message = Message()
+            message.messageBody = text
+            message.sender = sender
+            self.messageArray.append(message)
+            
+                self.configureTableView()
+                self.messageTableView.reloadData()
+        }
+    }
     
     // log out the user and send them back to WelcomeViewController
     @IBAction func logOutPressed(_ sender: AnyObject) {

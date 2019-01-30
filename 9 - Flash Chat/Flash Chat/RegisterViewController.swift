@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-
+import SVProgressHUD
 
 class RegisterViewController: UIViewController {
 
@@ -22,16 +22,19 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning( ) {
         super.didReceiveMemoryWarning()
     }
     
-    // set up a new user on the Firebase database and send to the chat VC
+    // set up a new user on the Firebase database and send to the chat VC, showing a loading symbol during wait
     @IBAction func registerPressed(_ sender: AnyObject) {
+        SVProgressHUD.show()
+        
         Auth.auth().createUser(withEmail: emailTextfield.text!, password: passwordTextfield.text!) {(user, error) in
             if error != nil {
-                print(error)
+                print(error!)
             } else {
+                SVProgressHUD.dismiss()
                 print("Registration Successful!")
                 self.performSegue(withIdentifier: "goToChat", sender: self)
             }

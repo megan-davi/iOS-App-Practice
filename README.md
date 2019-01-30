@@ -29,3 +29,6 @@ This app will first ask a user for permission to locate them for a weather forec
 
 ### 08 :: Bitcoin Ticker
 This app allows for a user to scroll through a list of currencies and see what a bitcoin is worth for the selected currency. The main goal of this app was to solidy knowledge gained from the Clima app; using protocols and delegates can be really tricky at first but Xcode's tooltip for using a UIPickerView told me that I needed a protocol and what required methods the delegate needed to operate. This app utilizes the [Bitcoin Average API](https://apiv2.bitcoinaverage.com). 
+
+### 09 :: Flash Chat
+Users can register an account to login into this app. After registering or logging in, they can chat using an instant-messaging interface. Building this app introduced me to Firebase which doubles as both the user login authenticator as well as the database to hold the user's message data. It also introduced me to working with UITableViews, creating custom cells for the TableViews, and the Navigation Controller which aids in navigating through view controllers. I gained more experience using CocoaPods as well, which included the design-oriented Chameleon Framework and SVProgressHUD for the loading heads-up displays. 
