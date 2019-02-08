@@ -8,7 +8,9 @@
 
 import UIKit
 
-class Item: NSObject {
+// Item class conforms to both Encodable and Decodable protocols using just "Codable"
+class Item: Codable {
     var title = ""
     var done = false
 }
+
