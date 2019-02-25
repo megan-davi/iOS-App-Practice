@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TodoListViewController.swift
 //  Todoey
 //
 //  Created by Megan Brown on 1/30/19.
@@ -13,6 +13,12 @@ class TodoListViewController: UITableViewController {
 
     var itemArray = [Item]()
     
+    var selectedCategory: Category? {
+        didSet{
+            loadItems()
+        }
+    }
+    
     let defaults = UserDefaults.standard
     
     // location of Core Data object
@@ -23,10 +29,9 @@ class TodoListViewController: UITableViewController {
         super.viewDidLoad()
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        loadItems()
     }
     
-    // MARK: - ⎡ TableView Datasource Methods ⎦
+    // MARK: - ⎡ 📝 TABLEVIEW DATASOURCE METHODS ⎦
     // ———————————————————————————————————————————————————————————————————
     
     // number of rows in table equal to number of items
@@ -45,21 +50,20 @@ class TodoListViewController: UITableViewController {
         return cell
     }
     
-    // MARK: - ⎡ TableView Delegate Methods ⎦
+    // MARK: - ⎡ ☑️ TABLEVIEW DELEGATE METHODS ⎦
     // ———————————————————————————————————————————————————————————————————
     
     // when a user clicks a row, add or subtract a checkmark, save checkmark property, and deselect row so that the gray fades away
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
-        
         saveItems()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    // MARK: - ⎡ Add New Items ⎦
+    // MARK: - ⎡ ➕ ADD NEW ITEMS ⎦
     // ———————————————————————————————————————————————————————————————————
     
-    // show alert for user to enter new item, then add this item to the list and save to context
+    // show alert for user to enter new item, then add this item to the list and save to contextdar
     @IBAction func addButtonPressed(_ sender: Any) {
         var textField = UITextField()
         
@@ -68,6 +72,7 @@ class TodoListViewController: UITableViewController {
             let newItem = Item(context: self.context)
             newItem.title = textField.text!
             newItem.done = false
+            newItem.parentCategory = self.selectedCategory
             self.itemArray.append(newItem)
             self.saveItems()
         }
@@ -80,7 +85,7 @@ class TodoListViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    // MARK: - ⎡ Model Manipulation Methods ⎦
+    // MARK: - ⎡ ⭐️ DATA MANIPULATION METHODS ⎦
     // ———————————————————————————————————————————————————————————————————
     
     // ⭐️ CREATE :: save items to the context
@@ -94,25 +99,50 @@ class TodoListViewController: UITableViewController {
     }
     
     // 👀 READ :: decode items from p-list
-    func loadItems() {
-        let request: NSFetchRequest<Item> = Item.fetchRequest()
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {   // "with" used for globally, "request" used locally
+                                                                                                    //  "Item.fetchRequest()" is the default here
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
+        
+        //let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, predicate])
+        //request.predicate = compoundPredicate
         do {
             itemArray = try context.fetch(request)
-        } catch{
+        } catch {
             print("Error fetching data from context \(error)")
         }
+        
+        tableView.reloadData()
     }
 }
 
-// MARK: - ⎡ Search Bar Methods ⎦
-// ———————————————————————————————————————————————————————————————————
-
 extension TodoListViewController: UISearchBarDelegate {
     
-    // when the search button is pressed, look for all of the data entrys where the search bar text matches the data
+    // MARK: - ⎡ 🔍 SEARCH BAR METHODS ⎦
+    // ———————————————————————————————————————————————————————————————————
+    
+    // when the search button is pressed, look for all of the data entries where the search bar text matches the data
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let request: NSFetchRequest<Item> = Item.fetchRequest()
-        let predicate = NSPredicate(format: "title CONTAINS %@", searchBar.text!)
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)   // search inclusive of case and diacritics
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        
+        loadItems(with: request, predicate: predicate)
+    }
+    
+    // when the search bar text is cleared, return to original list, dismiss keyboard, and deselect search bar
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadItems()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
     }
 }
 
