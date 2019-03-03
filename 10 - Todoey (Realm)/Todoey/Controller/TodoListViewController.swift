@@ -107,7 +107,6 @@ class TodoListViewController: UITableViewController {
 }
 
 extension TodoListViewController: UISearchBarDelegate {
-
     // MARK: - ⎡ 🔍 SEARCH BAR METHODS ⎦
     // ———————————————————————————————————————————————————————————————————
 
