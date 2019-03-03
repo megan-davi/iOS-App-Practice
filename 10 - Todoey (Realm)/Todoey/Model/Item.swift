@@ -2,15 +2,16 @@
 //  Item.swift
 //  Todoey
 //
-//  Created by Megan Brown on 1/31/19.
+//  Created by Megan Brown on 3/2/19.
 //  Copyright © 2019 Megan Brown. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import RealmSwift
 
-// Item class conforms to both Encodable and Decodable protocols using just "Codable"
-class Item: Codable {
-    var title = ""
-    var done = false
+class Item: Object {
+    @objc dynamic var title = ""
+    @objc dynamic var done = false
+    @objc dynamic var dateCreated: Date?
+    var parentCategory = LinkingObjects(fromType: Category.self, property: "items")    // child relationship
 }
-
