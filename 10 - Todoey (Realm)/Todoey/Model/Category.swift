@@ -11,6 +11,7 @@ import RealmSwift
 
 class Category: Object {
     @objc dynamic var name = ""
+    @objc dynamic var color = ""
     let items = List<Item>()        // states that the children of this class is an array of type Item
                                    // a list is like an array from realm
 }

@@ -8,11 +8,14 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
-class TodoListViewController: UITableViewController {
+class TodoListViewController: SwipeTableViewController {
 
     var todoItems: Results<Item>?
     let realm = try! Realm()
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var selectedCategory: Category? {
         didSet{
@@ -22,12 +25,41 @@ class TodoListViewController: UITableViewController {
     
     let defaults = UserDefaults.standard
     
+    // MARK: - ⎡ 🎂 APP LIFECYCLE METHODS ⎦
+    // ———————————————————————————————————————————————————————————————————
+    
     // when app starts, load any local storage data
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.separatorStyle = .none
         
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))  // reveal realm file location
     }
+    
+    // appears after viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        title = selectedCategory?.name
+        guard let colorHex = selectedCategory?.color else {fatalError()}
+        updateNavBar(withHexCode: colorHex)
+    }
+    
+    // runs when app is dismissed
+    override func viewWillDisappear(_ animated: Bool) {
+        updateNavBar(withHexCode: "1D9BF6")
+    }
+    // MARK: - ⎡ 🗺 NAV BAR SETUP METHODS ⎦
+    // ———————————————————————————————————————————————————————————————————
+    
+    func updateNavBar(withHexCode colorHexCode: String) {
+        guard let navBar = navigationController?.navigationBar else {fatalError("Navigation controller does not exist.")}
+        guard let navBarColor = UIColor(hexString: colorHexCode) else {fatalError()}
+        navBar.barTintColor = navBarColor                                 // background color
+        navBar.tintColor = ContrastColorOf(navBarColor, returnFlat: true)  // navigation buttons color
+        searchBar.barTintColor = navBarColor                               // search bar color
+        navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(navBarColor, returnFlat: true)]
+    }
+    
     
     // MARK: - ⎡ 📝 TABLEVIEW DATASOURCE METHODS ⎦
     // ———————————————————————————————————————————————————————————————————
@@ -39,10 +71,17 @@ class TodoListViewController: UITableViewController {
     
     // set row equal to item title property and add a checkmark if done property = true, else say there are no items added
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let item = todoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
+            
+            if let color = UIColor(hexString: selectedCategory!.color)?.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(todoItems!.count)) {  // gradient cells
+            cell.backgroundColor = color
+            cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+            }
+            
             cell.accessoryType = item.done ? .checkmark: .none
         } else {
             cell.textLabel?.text = "No Items Added"
@@ -87,6 +126,18 @@ class TodoListViewController: UITableViewController {
     func loadItems() {
         todoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
         tableView.reloadData()
+    }
+    
+    override func updateModel(at indexPath: IndexPath) {
+        if let item = todoItems?[indexPath.row] {
+            do {
+                try realm.write {
+                    realm.delete(item)
+                }
+            } catch {
+                print("Error deleting item: \(error)")
+            }
+        }
     }
     
     // ☑️ UPDATE :: when a user clicks a row, save updated "done" property to realm and refresh table view
