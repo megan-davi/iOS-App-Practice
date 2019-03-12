@@ -35,3 +35,6 @@ Users can register an account to login into this app. After registering or loggi
 
 ### 10 :: Todoey (Core Data/Realm)
 This app works as a Todo app, allowing users to create categories and subsequent tasks that fall within the categories. Users can swipe left to reveal a delete button or swipe all the way for a single-touch delete. There are two folders for Todoey here, one which uses iOS's Core Data and another that persists data with Realm. Both are object-oriented databases that persists the app's Item and Category classes with a few simple properties. There are so many new learning points that went into building this app. I can now manipulate UITableViews, UISearchBars, and UIAlerts with text fields. I can use User Defaults to persist simple data, or use CRUD operations for both Core Data and Realm.
+
+### 10.5 :: Advanced Swift Practice Files
+See two files for prompts. These files introduce me to getters and setters, as well as willGet and willSet methods.
