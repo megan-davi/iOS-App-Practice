@@ -14,6 +14,7 @@
 		447C2D3721E3DEF500CC9ED3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447C2D3521E3DEF500CC9ED3 /* LaunchScreen.storyboard */; };
 		447C2D4221E3DEF500CC9ED3 /* Auto_Layout_CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447C2D4121E3DEF500CC9ED3 /* Auto_Layout_CalculatorTests.swift */; };
 		447C2D4D21E3DEF500CC9ED3 /* Auto_Layout_CalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447C2D4C21E3DEF500CC9ED3 /* Auto_Layout_CalculatorUITests.swift */; };
+		44899CED225A9AB000A32EFD /* CalculatorLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44899CEC225A9AB000A32EFD /* CalculatorLogic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		447C2D4821E3DEF500CC9ED3 /* Auto Layout CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Auto Layout CalculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		447C2D4C21E3DEF500CC9ED3 /* Auto_Layout_CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auto_Layout_CalculatorUITests.swift; sourceTree = "<group>"; };
 		447C2D4E21E3DEF500CC9ED3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44899CEC225A9AB000A32EFD /* CalculatorLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorLogic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				447C2D2C21E3DEF300CC9ED3 /* AppDelegate.swift */,
 				447C2D2E21E3DEF300CC9ED3 /* ViewController.swift */,
 				447C2D3021E3DEF300CC9ED3 /* Main.storyboard */,
+				44899CEC225A9AB000A32EFD /* CalculatorLogic.swift */,
 				447C2D3321E3DEF500CC9ED3 /* Assets.xcassets */,
 				447C2D3521E3DEF500CC9ED3 /* LaunchScreen.storyboard */,
 				447C2D3821E3DEF500CC9ED3 /* Info.plist */,
@@ -258,6 +261,7 @@
 			files = (
 				447C2D2F21E3DEF300CC9ED3 /* ViewController.swift in Sources */,
 				447C2D2D21E3DEF300CC9ED3 /* AppDelegate.swift in Sources */,
+				44899CED225A9AB000A32EFD /* CalculatorLogic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

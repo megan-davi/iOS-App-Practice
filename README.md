@@ -22,7 +22,7 @@ This app allows a user to click through a quiz app answering true or false quest
 A "Choose Your Own Adventure Game" which allows a user to click through different scenarios of a story. This was mostly created to solidify knowledge gained thus far. Newest code feature is hiding buttons at the end of each story line. 
 
 ### 06 :: Calculator
-This app is not functional; it served as an introduction to setting constraints via alignment and pinning so that all future apps can look great on any screen size or alignment. This calculator mimics the look of the default Mac calculator. 
+This app serves as an introduction to setting constraints via alignment and pinning so that all future apps can look great on any screen size or alignment. This calculator mimics the look of the default Mac calculator. 
 
 ### 07 :: Clima
 This app will first ask a user for permission to locate them for a weather forecast. The weather will display as a temperature in celsius or fahrenheit based on a toggle and display an icon depicting the current conditions. On a linked view controller, the user can select a new city to view its weather, and see it on the first view. Building this app taught me many things: how to install and use Cocoapods (Alamofire http templating and SwiftyJSON json parsing), how protocols and delegates allow for view controllers to send data to one another, how to use Swift's powerful locationManager class and the CoreLocation Weather API, as well as how to better organize code using pragma marks. It also served as a great introduction for creating segues. 
@@ -37,4 +37,4 @@ Users can register an account to login into this app. After registering or loggi
 This app works as a Todo app, allowing users to create categories and subsequent tasks that fall within the categories. Users can swipe left to reveal a delete button or swipe all the way for a single-touch delete. There are two folders for Todoey here, one which uses iOS's Core Data and another that persists data with Realm. Both are object-oriented databases that persists the app's Item and Category classes with a few simple properties. There are so many new learning points that went into building this app. I can now manipulate UITableViews, UISearchBars, and UIAlerts with text fields. I can use User Defaults to persist simple data, or use CRUD operations for both Core Data and Realm.
 
 ### 10.5 :: Advanced Swift Practice Files
-See two files for prompts. These files introduce me to getters and setters, as well as willGet and willSet methods.
+See two files for prompts. These files introduce me to getters and setters, as well as willGet and willSet methods. I also returned to my calculator app in section 6 and made it functional using a struct with a few mutating methods as well as get and set methods. 
